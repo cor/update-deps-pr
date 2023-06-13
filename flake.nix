@@ -21,9 +21,13 @@
               git checkout -b "$BRANCH"
               GIT_LFS_SKIP_SMUDGE=1 nix flake update
               git add -A
-              git commit -m "chore: update deps $DATE\n\n(Generated using [update-deps-pr](https://github.com/cor/update-deps-pr)"
+              git commit -m "chore: update deps $DATE" -m "Generated using [update-deps-pr](https://github.com/cor/update-deps-pr)"
               git push -u origin "$BRANCH"
-              gh pr create -t "Update deps ($DATE)" -b "Update deps by running \`nix flake update\`\n\n*(This PR is generated using [update-deps-pr](https://github.com/cor/update-deps-pr))"
+
+              echo -e "Update deps by running \`nix flake update\`\n\n*(This PR is generated using [update-deps-pr](https://github.com/cor/update-deps-pr))*" > git-commit-msg
+              export MSG=$(cat git-commit-msg)
+              gh pr create -t "Update deps ($DATE)" -b "$MSG"
+              rm git-commit-msg
             '';
           };
         };
