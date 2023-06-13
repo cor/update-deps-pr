@@ -19,7 +19,7 @@
               echo "$DATE"
               BRANCH="update-deps-$DATE"
               git checkout -b "$BRANCH"
-              nix flake update
+              GIT_LFS_SKIP_SMUDGE=1 nix flake update
               git add -A
               git commit -m "chore: update deps $DATE\n\n(Generated using [update-deps-pr](https://github.com/cor/update-deps-pr)"
               git push -u origin "$BRANCH"
