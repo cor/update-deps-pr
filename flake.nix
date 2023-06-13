@@ -17,6 +17,13 @@
             text = ''
               DATE=$(date --iso-8601)
               echo "$DATE"
+              BRANCH="update-deps-$DATE"
+              git checkout -b "$BRANCH"
+              nix flake update
+              git add -A
+              git commit -m "chore: update deps $DATE"
+              git push -u origin "$BRANCH"
+              gh pr create -t "Update deps ($DATE)" -b "Update deps by running \`nix flake update\`"
             '';
           };
         };
