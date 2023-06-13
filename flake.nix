@@ -23,7 +23,7 @@
               git add -A
               git commit -m "chore: update deps $DATE\n\n(Generated using [update-deps-pr](https://github.com/cor/update-deps-pr)"
               git push -u origin "$BRANCH"
-              gh pr create -t "Update deps ($DATE)" -b "Update deps by running \`nix flake update\`\n\n*(This PR is generated using [update-deps-pr](https://github.com/cor/update-deps-pr)")
+              gh pr create -t "Update deps ($DATE)" -b "Update deps by running \`nix flake update\`\n\n*(This PR is generated using [update-deps-pr](https://github.com/cor/update-deps-pr))"
             '';
           };
         };
