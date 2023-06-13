@@ -25,7 +25,8 @@
               git push -u origin "$BRANCH"
 
               echo -e "Update deps by running \`nix flake update\`\n\n*(This PR is generated using [update-deps-pr](https://github.com/cor/update-deps-pr))*" > git-commit-msg
-              export MSG=$(cat git-commit-msg)
+              MSG=$(cat git-commit-msg)
+              export MSG
               gh pr create -t "Update deps ($DATE)" -b "$MSG"
               rm git-commit-msg
             '';
