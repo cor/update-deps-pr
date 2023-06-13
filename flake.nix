@@ -12,7 +12,7 @@
           packages.default = pkgs.writeShellApplication {
             name = "update-deps-pr";
 
-            runtimeInputs = with pkgs; [ gh coreutils ];
+            runtimeInputs = with pkgs; [ gh coreutils git nix ];
 
             text = ''
               DATE=$(date --iso-8601)
@@ -21,9 +21,9 @@
               git checkout -b "$BRANCH"
               nix flake update
               git add -A
-              git commit -m "chore: update deps $DATE"
+              git commit -m "chore: update deps $DATE\n\n(Generated using [update-deps-pr](https://github.com/cor/update-deps-pr)"
               git push -u origin "$BRANCH"
-              gh pr create -t "Update deps ($DATE)" -b "Update deps by running \`nix flake update\`"
+              gh pr create -t "Update deps ($DATE)" -b "Update deps by running \`nix flake update\`\n\n*(This PR is generated using [update-deps-pr](https://github.com/cor/update-deps-pr)")
             '';
           };
         };
